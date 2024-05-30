@@ -28,8 +28,20 @@ def update_contact(contacts, contact_info_keys, contact_index):
 
     key_to_update = list(chosen_contact.keys())[info_index_to_update_adusted]
     contacts[contact_index_adjusted][key_to_update] = info_new_value
-    
+
     print(f"Atualizado o {contact_info_keys[info_index_to_update_adusted]} para {info_new_value} com sucesso!")
+    view_contacts(contacts)
+  except Exception as e:
+    print(f"Error: {e}")
+  return
+
+def toggle_favorite(contacts, contact_index):
+  try:
+    contact_index_adjusted = int(contact_index) - 1
+    chosen_contact = contacts[contact_index_adjusted]
+
+    contacts[contact_index_adjusted]["favorite"] = not chosen_contact["favorite"]
+    print(f"\nO contato {chosen_contact['name']} foi adicionado aos favoritos com sucesso!")
     view_contacts(contacts)
   except Exception as e:
     print(f"Error: {e}")
@@ -60,5 +72,9 @@ while True:
     view_contacts(contacts)
     contact_index = input("Digite o número referente ao contato que deseja editar: ")
     update_contact(contacts, contact_info_keys, contact_index)
+  elif (chosen_option == "4"):
+    view_contacts(contacts)
+    contact_index = input("Digite o número referente ao contato que deseja marcar/desmarcar como favorito: ")
+    toggle_favorite(contacts, contact_index)
   elif (chosen_option == "6"):
     break
