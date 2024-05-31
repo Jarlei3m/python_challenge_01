@@ -58,6 +58,17 @@ def view_favorites_contacts(contacts):
       print(f"{index}. Nome: {name}, \n   Telefone: {phone}, \n   E-mail: {email}, \n   Favorito: {favorite}")
   return
 
+def delete_contact(contacts, contact_index):
+  try:
+    contact_index_adjusted = int(contact_index) - 1
+    chosen_contact = contacts[contact_index_adjusted]
+    contacts.remove(chosen_contact)
+    print(f"\nContato {chosen_contact['name']} foi removido com sucesso!")
+    view_contacts(contacts)
+  except Exception as e:
+    print(f"Error: {e}")
+  return
+
 contacts = []
 contact_info_keys = ['Nome', 'Telefone', 'E-mail']
 while True:
@@ -89,5 +100,9 @@ while True:
     toggle_favorite(contacts, contact_index)
   elif (chosen_option == "5"):
     view_favorites_contacts(contacts)
+  elif (chosen_option == "6"):
+    view_contacts(contacts)
+    contact_index = input("Digite o número referente ao contato que deseja apagar: ")
+    delete_contact(contacts, contact_index)
   elif (chosen_option == "7"):
     break
