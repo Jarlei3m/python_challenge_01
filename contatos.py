@@ -47,6 +47,17 @@ def toggle_favorite(contacts, contact_index):
     print(f"Error: {e}")
   return
 
+def view_favorites_contacts(contacts):
+  print("Lista de contatos favoritos:")
+  for index, contact in enumerate(contacts):
+    if (contact["favorite"]):
+      name = contact["name"]
+      phone = contact["phone"]
+      email = contact["email"]
+      favorite = '★' if contact["favorite"] else '☆'
+      print(f"{index}. Nome: {name}, \n   Telefone: {phone}, \n   E-mail: {email}, \n   Favorito: {favorite}")
+  return
+
 contacts = []
 contact_info_keys = ['Nome', 'Telefone', 'E-mail']
 while True:
@@ -56,8 +67,8 @@ while True:
   print("3. Editar contato")
   print("4. Marcar/Descamarcar contato como favorito")
   print("5. Visualizar contatos favoritados")
-  print("5. Apagar contato")
-  print("6. Sair")
+  print("6. Apagar contato")
+  print("7. Sair")
   chosen_option = input("Digite sua escolha: ")
 
   if (chosen_option == "1"):
@@ -76,5 +87,7 @@ while True:
     view_contacts(contacts)
     contact_index = input("Digite o número referente ao contato que deseja marcar/desmarcar como favorito: ")
     toggle_favorite(contacts, contact_index)
-  elif (chosen_option == "6"):
+  elif (chosen_option == "5"):
+    view_favorites_contacts(contacts)
+  elif (chosen_option == "7"):
     break
